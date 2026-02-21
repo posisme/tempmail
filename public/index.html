@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tempmail</title>
+    
+  </head>
+  <body>
+    <div id="root">
+        <form action="/maketempmail" method="post">
+            <input  type="text" 
+                    name="tempEmail" 
+                    placeholder="Enter email to create" 
+                    required 
+                    value="@posis.me"
+            />
+            <input  type="text" 
+                    name="forwardEmail" 
+                    placeholder="Enter email to forward to" 
+                    required
+            />
+            <input  type="text" 
+                    name="duration" 
+                    placeholder="Enter duration in hours" 
+                    required
+                    value="24"
+            />
+            <button type="submit">Make Temporary Email</button>
+        </form>
+
+    </div>
+  </body>
+</html>
