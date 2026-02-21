@@ -35,7 +35,7 @@ app.get('*', (req, res) => {
 });
 
 // Insert temp email into sqlite
-app.post('/api/maketempemail', (req, res) => {
+app.post('/api/maketempmail', (req, res) => {
   const tempEmail = req.body.tempEmail || `temp-${Date.now()}@posis.me`;
   const forwardEmail = req.body.forwardEmail || 'drop';
   const duration = Number(req.body.duration) || 24; // hours
