@@ -33,7 +33,7 @@
                 emails.forEach(function(email) {
                   $('#emaillist').append(
                     `<div>
-                      <strong>${email.temp_email}</strong> forwards to <em>${email.forward_email}</em> and expires at ${email.expires_at}
+                      <strong>${email.email}</strong> forwards to <em>${email.destination}</em>
                     </div>`
                   );
                 });
