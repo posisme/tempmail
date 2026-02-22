@@ -102,22 +102,20 @@ async function main() {
       let added = 0, skipped = 0, errors = 0;
 
       for (const r of rows) {
-        const source = r[emailCol];
-        if (!source) { skipped++; continue; }
-        let destination = DEFAULT_DEST || (forwardCol ? r[forwardCol] : null) || source;
+        const source = r.email;
+        let destination = r.forward_email;
 
         try {
-          deleteStmt.run(source);
+          
           insertStmt.run(source, destination);
-          added++;
+          
         } catch (err) {
           console.error('Error inserting mapping for', source, err.message);
-          errors++;
+          
         }
       }
 
       commit.run();
-      console.log(`Sync complete. Added/updated: ${added}. Skipped: ${skipped}. Errors: ${errors}`);
     } catch (err) {
       console.error('Transaction failed:', err.message);
       try { rollback.run(); } catch (_) {}
