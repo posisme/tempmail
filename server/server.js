@@ -31,9 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Fallback for SPA or unknown routes — serve index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-});
+
 app.get("/api/listemails", (req, res) => {
   const sql = `SELECT id, temp_email, forward_email, expires_at FROM temp_emails`;
   db.all(sql, [], (err, rows) => {
@@ -63,7 +61,9 @@ app.post('/api/maketempmail', (req, res) => {
     return res.json({ id: this.lastID, email: tempEmail });
   });
 });
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
