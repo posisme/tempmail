@@ -27,6 +27,7 @@ db.run(`CREATE TABLE IF NOT EXISTS temp_emails (
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Fallback for SPA or unknown routes — serve index.html
