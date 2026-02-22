@@ -46,19 +46,18 @@ app.get("/api/listemails", (req, res) => {
 });
 // Insert temp email into sqlite
 app.post('/api/resurrectemail', (req, res) => {
-  const tempEmail = req.body.tempEmail;
-  const forwardEmail = req.body.forwardEmail;
+  const email = req.body.email;
   const duration = 24; // hours
 
   const expiresModifier = `+${duration} hours`;
   const sql = `UPDATE temp_emails SET expires_at = datetime('now', ?) WHERE temp_email = ?`;
 
-  db.run(sql, [expiresModifier, tempEmail], function (err) {
+  db.run(sql, [expiresModifier, email], function (err) {
     if (err) {
       console.error('DB update error', err);
       return res.status(500).json({ error: 'Database error' });
     }
-    return res.json({ id: this.lastID, email: tempEmail });
+    return res.json({ id: this.lastID, email: email });
   });
 });
 
