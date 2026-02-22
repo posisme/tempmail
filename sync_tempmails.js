@@ -89,8 +89,8 @@ async function main() {
     console.log(`Found ${rows.length} rows in temp_emails.`);
 
     // Prepare statements
-    const deleteStmt = dstDb.prepare(`DELETE FROM ${quoteIdent('virtual_aliases')} WHERE ${quoteIdent(dstSourceCol)} = ?`);
-    const insertSql = `INSERT INTO ${quoteIdent('virtual_aliases')} (${quoteIdent(dstSourceCol)}, ${quoteIdent(dstDestCol)}) VALUES (?, ?)`;
+    const deleteStmt = dstDb.prepare(`DELETE FROM ${quoteIdent('virtual_aliases')}`);
+    const insertSql = `INSERT INTO ${quoteIdent('virtual_aliases')} ('email', 'destination') VALUES (?, ?)`;
     const insertStmt = dstDb.prepare(insertSql);
 
     const tx = dstDb.prepare('BEGIN');
