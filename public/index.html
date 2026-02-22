@@ -61,7 +61,7 @@
                       ''
                   ).click(function(e) {
                     if (email.type === 'dump') {
-                      const emailToResurrect = $(e.target).prop('email');
+                      const emailToResurrect = $(e.target).attr('email');
                       $.ajax({
                         type: 'POST',
                         url: '/api/resurrectemail',
