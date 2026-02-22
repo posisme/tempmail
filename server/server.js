@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Fallback for SPA or unknown routes — serve index.html
 
 app.get("/api/listemails", (req, res) => {
-  const sql = `SELECT id, temp_email, forward_email, expires_at FROM temp_emails`;
+  const sql = `SELECT * FROM virtual_aliases`;
   db.all(sql, [], (err, rows) => {
     if (err) {
       console.error('DB query error', err);
