@@ -4,13 +4,13 @@ body{
 }
 input{
     margin: 5px;
-    padding: 5px;
-    width: 300px;
+    width: 100%;
     font-size:1.2rem;
 }
 button{
-    padding: 5px 10px;
     font-size: 1.2rem;
+    width:100%;
+    margin:5px;
 }
 #root{
     display: flex;
