@@ -24,6 +24,26 @@
               }
             });
           });
+          function loadEmails() {
+            $.ajax({
+              type: 'GET',
+              url: '/api/listemails',
+              success: function(emails) {
+                $('#emaillist').empty();
+                emails.forEach(function(email) {
+                  $('#emaillist').append(
+                    `<div>
+                      <strong>${email.temp_email}</strong> forwards to <em>${email.forward_email}</em> and expires at ${email.expires_at}
+                    </div>`
+                  );
+                });
+              },
+              error: function() {
+                alert('Error loading emails.');
+              }
+            });
+          }
+          loadEmails();
         });
       </script>
         <form id="emailform">
@@ -46,7 +66,9 @@
             />
             <button type="submit">Make Temporary Email</button>
         </form>
+        <div id="emaillist">
 
+        </div>
     </div>
   </body>
 </html>

@@ -34,7 +34,16 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
-
+app.get("/api/listemails", (req, res) => {
+  const sql = `SELECT id, temp_email, forward_email, expires_at FROM temp_emails`;
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.error('DB query error', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    return res.json(rows);
+  });
+});
 // Insert temp email into sqlite
 app.post('/api/maketempmail', (req, res) => {
   
