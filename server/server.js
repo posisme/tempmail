@@ -7,11 +7,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Ensure data directory exists
-const dataDir = path.join(__dirname, '..', 'data');
+const dataDir = path.join(__dirname, '..', 'backend');
 fs.mkdirSync(dataDir, { recursive: true });
 
 // Open (or create) sqlite database
-const dbPath = path.join(dataDir, 'tempmail.sqlite');
+const dbPath = path.join(dataDir, 'postfix.db');
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) console.error('Failed to open database', err);
   else console.log('Opened sqlite DB at', dbPath);
