@@ -4,11 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tempmail</title>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <div id="root">
-        <form action="/api/maketempmail" method="post">
+      <script>
+        $(function() {
+          $('form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: '/api/maketempmail',
+              data: $(this).serialize(),
+              success: function(response) {
+                alert('Temporary email created successfully!');
+              },
+              error: function() {
+                alert('Error creating temporary email.');
+              }
+            });
+          });
+        });
+      </script>
+        <form>
             <input  type="text" 
                     name="tempEmail" 
                     placeholder="Enter email to create" 
