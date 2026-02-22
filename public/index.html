@@ -32,7 +32,7 @@
                 $('#emaillist').empty();
                 emails.forEach(function(email) {
                   $('#emaillist').append(
-                    `<div>
+                    `<div class='listitem'>
                       <strong>${email.email}</strong> forwards to <em>${email.destination}</em>
                     </div>`
                   );
@@ -52,18 +52,18 @@
                     placeholder="Enter email to create" 
                     required 
                     value="@posis.me"
-            />
+            /><br />
             <input  type="text" 
                     name="forwardEmail" 
                     placeholder="Enter email to forward to" 
                     required
-            />
+            /><br />
             <input  type="text" 
                     name="duration" 
                     placeholder="Enter duration in hours" 
                     required
                     value="24"
-            />
+            /><br />
             <button type="submit">Make Temporary Email</button>
         </form>
         <div id="emaillist">
