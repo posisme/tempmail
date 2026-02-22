@@ -57,11 +57,11 @@
                       <div>`
                     ).append(
                       email.type === 'dump' ? 
-                      `<button class='resurrect-btn' data-email='${email.email}'>Resurrect</button>` : 
+                      `<button class='resurrect-btn' email='${email.email}'>Resurrect</button>` : 
                       ''
-                  ).click(function() {
+                  ).click(function(e) {
                     if (email.type === 'dump') {
-                      const emailToResurrect = $(this).data('email');
+                      const emailToResurrect = $(e.target).prop('email');
                       $.ajax({
                         type: 'POST',
                         url: '/api/resurrectemail',
