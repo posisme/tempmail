@@ -47,32 +47,37 @@
               success: function(emails) {
                 $('#emaillist').empty();
                 emails.forEach(function(email) {
-                  if(email.type === 'dump') {
-                    $('#emaillist').append(
-                      `<div class='listitem'>
-                        <div>
-                          <strong>${email.email}</strong> 
-                          forwards to <em>${email.destination}</em>
-                        </div>
-                        <div>
-                          <button class="resurrect-btn" 
-                            data-email="${email.email}">
-                            Resurrect
-                          </button>
-                        </div>
-                      <div>`
-                    );
-                    return;
-                  }else if(email.type === 'virtual') {
-                    $('#emaillist').append(
+                  
+                    $('#emaillist').append($(
                       `<div class='listitem'>
                         <div>
                           <strong>${email.email}</strong> 
                           forwards to <em>${email.destination}</em>
                         </div>
                       <div>`
-                    );
+                    ).append(
+                      email.type === 'dump' ? 
+                      `<button class='resurrect-btn' data-email='${email.email}'>Resurrect</button>` : 
+                      ''
+                  ).click(function() {
+                    if (email.type === 'dump') {
+                      const emailToResurrect = $(this).data('email');
+                      $.ajax({
+                        type: 'POST',
+                        url: '/api/resurrectemail',
+                        data: { email: emailToResurrect },
+                        success: function() {
+                          alert('Email resurrected successfully!');
+                          loadEmails();
+                        },
+                        error: function() {
+                          alert('Error resurrecting email.');
+                        }
+                      });
                     }
+                  })
+                )
+                    
                 });
               },
               error: function() {
