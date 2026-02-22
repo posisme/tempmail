@@ -18,8 +18,8 @@
 const sqlite3 = require('sqlite3').verbose();
 const { promisify } = require('util');
 
-const SRC_DB = '/data/tempmail.sqlite';
-const DST_DB = '/backend/postfix.db';
+const SRC_DB = '/usr/app/data/tempmail.sqlite';
+const DST_DB = '/usr/app/backend/postfix.db';
 
 
 function openDb(path, mode = sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE) {
