@@ -33,11 +33,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Fallback for SPA or unknown routes — serve index.html
 
 app.get("/api/listemails", (req, res) => {
-  const sql = `SELECT *, "virtual" as type FROM virtual_aliases
-  
+  const sql = `SELECT email,destination, "virtual" as type FROM virtual_aliases
     UNION ALL
-    SELECT *, "dump" as type FROM dump_aliases
-    ORDER BY expires_at DESC`;
+    SELECT email, "dump" as destination, "dump" as type FROM dump_aliases`;
   db.all(sql, [], (err, rows) => {
     if (err) {
       console.error('DB query error', err);
